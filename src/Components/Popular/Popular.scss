@@ -1,0 +1,40 @@
+.popular {
+    text-align: center;
+    padding: 2em ;
+    margin: 2em 0;
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    &__title {
+        text-align: center;
+        margin: 0 auto 2em auto;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        p {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 0.5em 0;
+            padding: 0;
+        }
+        div {
+            width: 6em;
+            height: 0.5em;
+            background-color: black;
+        }
+    }
+    &__view-more {
+        margin: 3.7em auto;
+        width: 40em;
+        padding: 1.2em;
+        font-size: 0.9em;
+        font-weight: bold;
+        border: 2px solid black;
+        border-radius: none;
+        background-color: transparent;
+        border-radius: 0.4em;
+    }
+}

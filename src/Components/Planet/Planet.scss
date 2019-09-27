@@ -1,0 +1,15 @@
+.planet {
+    width: 25%;
+    margin: 2em;
+    height: 30em;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    p {
+        font-size: 1.3em;
+        color: white;
+        text-align: center;
+    }
+}
