@@ -5,5 +5,10 @@
   .slide {
     display: flex;
     transition: transform 0.9s ease;
+ 
+  }
+  .radiowrap {
+    display: flex;
+    justify-content: center;
   }
 }

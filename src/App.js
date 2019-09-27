@@ -6,11 +6,12 @@ import Starships from "./Components/Starship";
 import Characters from "./Components/Characters";
 import Slide from "./Components/Slide";
 import Planet from "./Components/Planet";
+import StarshipView from "./Pages/StarshipView";
 
 const App = () => {
   return (
     <div className="App">
-      <Search />
+      {/* <Search />
       <Popular name="Starships">
         <div className="container">
           <Starships />
@@ -42,8 +43,8 @@ const App = () => {
           <Characters />
           <Characters />
         </div>
-      </Popular>
-   
+      </Popular> */}
+        <StarshipView />
     </div>
   );
 }
