@@ -25,8 +25,11 @@ const Slide = ({children}) => {
         <div className="slide-container">
         <div style={{width : `${width}%`}} className="slide" ref={sliderRef}>
             {children}
+        </div >
+        <div className="radiowrap">
+           {RadioList} 
         </div>
-            {RadioList}
+            
         </div>
     )
 }
