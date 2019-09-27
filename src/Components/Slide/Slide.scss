@@ -1,0 +1,9 @@
+.slide-container {
+    margin: 0 auto;
+    overflow: hidden;
+    width: 88%;
+  .slide {
+    display: flex;
+    transition: transform 0.9s ease;
+  }
+}

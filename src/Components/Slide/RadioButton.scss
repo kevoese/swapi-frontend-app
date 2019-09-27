@@ -1,0 +1,19 @@
+.radio {
+    display: inline-block;
+    margin: 0.25em;
+    label {
+        display: block;
+        cursor: pointer;
+        width: 1em;
+        height: 1em;
+        border-radius: 100%;
+        background-color: white;
+        border: 1px solid black;
+    }
+    input {
+        display: none;
+        &:checked + label {
+            background-color: black;
+          }
+    }
+}

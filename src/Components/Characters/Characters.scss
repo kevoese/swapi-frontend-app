@@ -1,0 +1,53 @@
+.character {
+  display: flex;
+  width: 40%;
+  margin: 2em;
+  background-color: rgb(243, 243, 243);
+  height: 25em;
+  img {
+    width: 60%;
+    height: 25em;
+    object-fit: cover;
+  }
+  &__card {
+    width: 40%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    padding: 1.5em;
+    p {
+      padding: 0;
+      margin: 0;
+    }
+    .title {
+        margin-bottom: 2em;
+        text-align: left;
+      .name {
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+      .role {
+        font-size: 0.85em;
+        font-style: italic;
+        color: grey;
+      }
+    }
+
+    .description {
+        p {
+        text-align: left;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        }
+        .read-more {
+            text-align: left;
+          a {
+              font-weight: bold;
+              border-bottom: 2px solid black;
+          }
+        }
+    }
+  }
+}

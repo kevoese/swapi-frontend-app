@@ -1,0 +1,46 @@
+.starship {
+  width: 25%;
+  margin: 2em;
+  background-color: rgb(243, 243, 243);
+  img {
+    width: 100%;
+    height: 20em;
+    object-fit: cover;
+  }
+  &__card {
+    padding: 1.2em;
+    box-shadow: inset 10px -10px 2px -2px rgb(214, 214, 214);
+    &__info {
+      p {
+        margin: 0;
+        padding: 0;
+      }
+      .title {
+        font-size: 1.5em;
+        color: black;
+        text-align: left;
+        padding: 0;
+        margin-bottom: 0.5em;
+      }
+      .description {
+        text-align: justify;
+      }
+    }
+    .btn-wrap {
+        display: flex;
+        justify-content: flex-end;
+      button {
+        display: flex;
+        padding: 1.2em 2em;
+        font-size: 1em;
+        border: none;
+        margin-right: 1px;
+        margin-top: 1em;
+        background-color: rgb(177, 177, 177);
+        .icon {
+          margin-left: 0.5em;
+        }
+      }
+    }
+  }
+}
