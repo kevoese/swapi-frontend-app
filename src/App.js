@@ -1,12 +1,13 @@
 import React from "react";
 import "./App.css";
-import Search from "./Components/Search";
-import Popular from "./Components/Popular";
-import Starships from "./Components/Starship";
-import Characters from "./Components/Characters";
-import Slide from "./Components/Slide";
-import Planet from "./Components/Planet";
-import StarshipView from "./Pages/StarshipView";
+// import Search from "./Components/Search";
+// import Popular from "./Components/Popular";
+// import Starships from "./Components/Starship";
+// import Characters from "./Components/Characters";
+// import Slide from "./Components/Slide";
+// import Planet from "./Components/Planet";
+// import StarshipView from "./Pages/StarshipView";
+import PopularStarships from "./Pages/PopularStarship";
 
 const App = () => {
   return (
@@ -44,7 +45,8 @@ const App = () => {
           <Characters />
         </div>
       </Popular> */}
-        <StarshipView />
+         {/* <StarshipView />  */}
+        <PopularStarships />
     </div>
   );
 }
