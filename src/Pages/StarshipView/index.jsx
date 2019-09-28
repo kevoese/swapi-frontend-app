@@ -4,6 +4,7 @@ import starshipImg from "../../assets/starship-1.jpg";
 import Slide from "../../Components/Slide";
 import Starships from "../../Components/Starship";
 import logo from "../../assets/logo.png";
+import Paginator from "../../Components/Paginator";
 
 const StarshipView = () => {
   return (
