@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Popular.scss';
 
-const Popular = ({ children, name, hideViewMore }) => {
+const Popular = ({ children, name, hideViewMore, viewLink }) => {
     return (
         <div className="popular">
             <div className="popular__title">
@@ -16,9 +17,9 @@ const Popular = ({ children, name, hideViewMore }) => {
                 {children}
             </div>
 
-           { hideViewMore ? '' : <button className="popular__view-more">
+           { hideViewMore ? '' : <Link to={viewLink}><button className="popular__view-more">
                 VIEW MORE
-            </button>}
+            </button></Link>}
         </div>
     )
 }
