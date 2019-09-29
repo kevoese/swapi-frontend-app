@@ -1,56 +1,22 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-// import Search from "./Components/Search";
-// import Popular from "./Components/Popular";
-// import Starships from "./Components/Starship";
-// import Characters from "./Components/Characters";
-// import Slide from "./Components/Slide";
-// import Planet from "./Components/Planet";
-// import StarshipView from "./Pages/StarshipView";
-// import PopularStarships from "./Pages/PopularStarship";
+import StarshipView from "./Pages/StarshipView";
+import PopularStarships from "./Pages/PopularStarship";
 import PopularCharacters from "./Pages/PopularCharacters";
+import Home from "./Pages/Home";
 
 const App = () => {
   return (
     <div className="App">
-      {/* <Search />
-      <Popular name="Starships">
-        <div className="container">
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-        </div>
-      </Popular>
-
-      <Popular name="Planets" hideViewMore>
-        <Slide>
-        <Planet text='Earth' img='https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg' />
-        <Planet text='Earth' img='https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg' />
-        <Planet text='Earth' img='https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg' />
-        <Planet text='Earth' img='https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg' />
-        <Planet text='Earth' img='https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg' />
-        <Planet text='Earth' img='https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg' />
-        <Planet text='Earth' img='https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg' />
-        <Planet text='Earth' img='https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg' />
-        </Slide>
-      </Popular>
-
-      <Popular name="Characters">
-        <div className="container">
-          <Characters />
-          <Characters />
-          <Characters />
-          <Characters />
-        </div>
-      </Popular> */}
-         {/* <StarshipView />  */}
-        {/* <PopularStarships /> */}
-        <PopularCharacters />
+      <Router>
+        <Route exact path="/" component={Home} />
+        <Route path="/starship/:id" component={StarshipView} />
+        <Route path="/popular-starships" component={PopularStarships} />
+        <Route path="/popular-characters" component={PopularCharacters} />
+      </Router>
     </div>
   );
-}
+};
 
 export default App;

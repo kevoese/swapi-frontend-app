@@ -26,20 +26,12 @@
         font-size: 1.1em;
         font-weight: bold;
       }
-      .role {
-        font-size: 0.85em;
-        font-style: italic;
-        color: grey;
-      }
     }
 
     .description {
         p {
         text-align: left;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 6;
-        -webkit-box-orient: vertical;
+        margin: 1em 0;
         }
         .read-more {
             text-align: left;
