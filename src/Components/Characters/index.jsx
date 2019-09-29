@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import character from "../../assets/character-1.jpg";
 import "./Characters.scss";
 
@@ -18,7 +19,7 @@ const Characters = ({ name, year, gender}) => {
           <strong>Gender : </strong> {gender}
         </p>
         <div className="read-more">
-          <a>Read more</a>
+          <Link to='/'>Read more</Link>
         </div>
         
         </div>

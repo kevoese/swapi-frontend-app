@@ -1,41 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { chunk } from "lodash";
 import './Paginator.scss';
 
-const Paginator = ({ content, setPageData }) => {
+const Paginator = ({ count, setUrl, prev, next, loading }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [pageTitle, setPageTitle] = useState('');
-  const contentChunks = chunk(content, 8);
+  
  
 
-  const handleForward = () => {
-    if(((currentPage + 1) * 8) < content.length) {
-      setCurrentPage(prevPage => prevPage + 1);
+  const handlePagination = (e) => {
+    const type = e.target.id;
+    if(type === 'foward_btn') {
+      setCurrentPage(currentPage => currentPage + 1);
+      next && setUrl(next)
+    }
+    else {
+      setCurrentPage(currentPage => currentPage - 1);
+      prev && setUrl(prev)
     }
   }
 
-  const handleBackward = () => {
-    if(currentPage > 0) setCurrentPage(prevPage => prevPage - 1);
-  }
-
-  const handlePagination = () => {
-    const pageData = contentChunks[currentPage];
-    setPageData(pageData);
-    const dataNum = (currentPage * 8) + 1;
-    setPageTitle(`${dataNum} - ${dataNum + 8 > content.length ? content.length : dataNum + 8} of ${content.length}`);
+  const handlePageName = () => {
+    const first = currentPage * 10;
+    const last = first + 10;
+    setPageTitle(`${first} - ${last > count ? count :last} of ${count}`);
   }
 
   useEffect(() => {
-      handlePagination();
+    console.log({currentPage, next})
+      handlePageName();
       
-  }, [currentPage]);
+  }, [currentPage, count]);
  
   return (
     <div className="paginator">
       <p className="pageTitle">
         {pageTitle}
       </p>
-      <div onClick={handleBackward} className={`left ${currentPage === 0 ? 'lighten' : ''}`}>
+      <button onClick={handlePagination} disabled={loading || !prev} id="backward_btn" className={`left ${!prev ? 'lighten' : ''}`}>
         <svg
           width="20"
           height="20"
@@ -48,8 +49,8 @@ const Paginator = ({ content, setPageData }) => {
             fill="black"
           />
         </svg>
-      </div>
-      <div onClick={handleForward} className={`right ${!(((currentPage + 1) * 8) < content.length) ? 'lighten' : ''}`}>
+      </button>
+      <button onClick={handlePagination} disabled={loading || !next} id="foward_btn" className={`right ${!next ? 'lighten' : ''}`}>
         <svg
           width="20"
           height="20"
@@ -62,7 +63,7 @@ const Paginator = ({ content, setPageData }) => {
             fill="black"
           />
         </svg>
-      </div>
+      </button>
     </div>
   );
 };
