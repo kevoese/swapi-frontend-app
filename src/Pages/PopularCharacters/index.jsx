@@ -3,14 +3,31 @@ import Popular from "../../Components/Popular";
 import Characters from "../../Components/Characters";
 import Search from "../../Components/Search";
 import Paginator from "../../Components/Paginator";
+import { axiosCall } from "../../utils";
 import "./PopularCharacters.scss";
 
 const PopularCharacters = () => {
-  const [pageData, setPageData] = useState([]);
+  const [pageData, setPageData] = useState(null);
+  const [charactersInfo, setCharactersInfo] = useState(null);
+  const [url, setUrl] = useState("https://swapi.co/api/people/?format=json");
+
+  const fetchData = async () => {
+    setPageData(null);
+    const starships = await axiosCall({
+      url
+    });
+    setPageData(starships.results);
+    setCharactersInfo(starships);
+  };
 
   useEffect(() => {
-    console.log({ pageData });
+    fetchData();
+  }, [url]);
+
+  useEffect(() => {
+    pageData && console.log({ count: pageData });
   }, [pageData]);
+
 
   return (
     <div className="popular-characters">
@@ -39,42 +56,28 @@ const PopularCharacters = () => {
         </div>
 
         <div className="container">
-          <Characters />
-          <Characters />
-          <Characters />
-          <Characters />
+        {pageData
+            ? pageData.map(({ gender, name, birth_year }, index) => (
+                <Characters
+                  year={birth_year}
+                  name={name}
+                  gender={gender}
+                  key={index}
+                />
+              ))
+            : "Loading..."}
         </div>
-        <Paginator
-          setPageData={setPageData}
-          content={[
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19,
-            20,
-            21,
-            22,
-            23,
-            24,
-            25,
-            26
-          ]}
-        />
+        {charactersInfo ? (
+          <Paginator
+            loading={pageData ? false : true}
+            setUrl={setUrl}
+            next={charactersInfo && charactersInfo.next}
+            prev={charactersInfo && charactersInfo.previous}
+            count={charactersInfo && charactersInfo.count}
+          />
+        ) : (
+          ""
+        )}
       </Popular>
     </div>
   );
