@@ -7,6 +7,6 @@ body {
   padding: 0;
 }
 
-button, input, a {
+button, input, a, select {
   outline: none;
 }

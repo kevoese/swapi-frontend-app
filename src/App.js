@@ -7,7 +7,8 @@ import "./App.css";
 // import Slide from "./Components/Slide";
 // import Planet from "./Components/Planet";
 // import StarshipView from "./Pages/StarshipView";
-import PopularStarships from "./Pages/PopularStarship";
+// import PopularStarships from "./Pages/PopularStarship";
+import PopularCharacters from "./Pages/PopularCharacters";
 
 const App = () => {
   return (
@@ -46,7 +47,8 @@ const App = () => {
         </div>
       </Popular> */}
          {/* <StarshipView />  */}
-        <PopularStarships />
+        {/* <PopularStarships /> */}
+        <PopularCharacters />
     </div>
   );
 }
