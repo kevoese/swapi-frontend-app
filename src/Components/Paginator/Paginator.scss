@@ -27,4 +27,12 @@
     border-radius: 0em 1em 1em 0em;
     border-left-width: 1px;
   }
+
+  .lighten {
+      svg {
+          path {
+              fill: rgb(190, 190, 190) !important;
+          }
+      }
+  }
 }

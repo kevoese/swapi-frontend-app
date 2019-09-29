@@ -1,0 +1,31 @@
+.popular-characters {
+    .filters {
+        display: flex;
+        padding: 2em;
+        width: 88%;
+        margin: 0 auto;
+        label {
+            font-size: 1.6em;
+            text-transform: uppercase;
+            margin-right: 0.5em;
+            color: grey;
+        }
+
+        select {
+            padding: 0.6em 3em;
+            font-size: 1.2em;
+            border: 3px solid grey;
+            border-radius: 0.4em;
+            color: grey;
+        
+        }
+
+        .gender-wrap {
+            margin-right: 3em;
+        }
+
+        .grid-wrap {
+            margin-left: 3em;
+        }
+    }
+}

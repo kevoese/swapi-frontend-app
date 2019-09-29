@@ -26,7 +26,8 @@ const Paginator = ({ content, setPageData }) => {
   }
 
   useEffect(() => {
-      handlePagination()
+      handlePagination();
+      
   }, [currentPage]);
  
   return (
@@ -34,7 +35,7 @@ const Paginator = ({ content, setPageData }) => {
       <p className="pageTitle">
         {pageTitle}
       </p>
-      <div onClick={handleBackward} className="left">
+      <div onClick={handleBackward} className={`left ${currentPage === 0 ? 'lighten' : ''}`}>
         <svg
           width="20"
           height="20"
@@ -48,7 +49,7 @@ const Paginator = ({ content, setPageData }) => {
           />
         </svg>
       </div>
-      <div onClick={handleForward} className="right">
+      <div onClick={handleForward} className={`right ${!(((currentPage + 1) * 8) < content.length) ? 'lighten' : ''}`}>
         <svg
           width="20"
           height="20"
