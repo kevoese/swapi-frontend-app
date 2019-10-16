@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import "./index.scss";
 import logo from "../../assets/logo.png";
 
 const Search = () => {
   return (
     <div className="search">
-      <span className="search__page-logo">
+      <Link to ='/' className="search__page-logo">
         <img src={logo} alt="" />
-      </span>
+      </Link>
       <div className="search__title">
         <img src={logo} alt="" />
         <p>Directory</p>

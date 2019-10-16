@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import starship from "../../assets/starship-1.jpg";
 import "./Starships.scss";
 
-const Starships = ({ img, model, capacity, name }) => {
+const Starships = ({ img, model, capacity, name, url }) => {
   return (
     <div className="starship">
       <img src={starship} alt="" />
@@ -17,10 +18,12 @@ const Starships = ({ img, model, capacity, name }) => {
           </p>
         </div>
         <div className="btn-wrap">
-          <button>
-            <span>Read More</span>
-            <span className="icon">=></span>
-          </button>
+          <Link to={`starship/${url && url.split('/')[5]}`}>
+            <button>
+              <span>Read More</span>
+              <span className="icon">></span>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

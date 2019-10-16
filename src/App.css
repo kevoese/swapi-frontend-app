@@ -10,3 +10,7 @@ body {
 button, input, a, select {
   outline: none;
 }
+
+a, button {
+  cursor: pointer;
+}

@@ -39,12 +39,13 @@ const Home = () => {
       <Popular name="Starships" viewLink = "/popular-starships">
         <div className="container">
           {starshipsData
-            ? starshipsData.map(({ model, name, cargo_capacity }, index) => (
+            ? starshipsData.map(({ model, name, cargo_capacity, url }, index) => (
                 <Starships
                   model={model}
                   name={name}
                   capacity={cargo_capacity}
                   key={index}
+                  url={url}
                 />
               ))
             : "Loading..."}

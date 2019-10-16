@@ -10,17 +10,19 @@ const PopularStarships = () => {
   const [starshipInfo, setStarshipInfo] = useState(null);
   const [url, setUrl] = useState("https://swapi.co/api/starships/?format=json");
 
-  const fetchData = async () => {
-    setPageData(null);
-    const starships = await axiosCall({
-      url
-    });
-    setPageData(starships.results);
-    setStarshipInfo(starships);
-  };
-
   useEffect(() => {
-    fetchData();
+    let isMounted = true;
+    (async () => {
+      if (isMounted) {
+        setPageData(null);
+        const starships = await axiosCall({
+          url
+        });
+        setPageData(starships.results);
+        setStarshipInfo(starships);
+      }
+    })();
+    return () => (isMounted = false);
   }, [url]);
 
   return (
@@ -29,12 +31,13 @@ const PopularStarships = () => {
       <Popular name="Starships" hideViewMore>
         <div className="container">
           {pageData
-            ? pageData.map(({ model, name, cargo_capacity }, index) => (
+            ? pageData.map(({ model, name, cargo_capacity, url }, index) => (
                 <Starships
                   model={model}
                   name={name}
                   capacity={cargo_capacity}
                   key={index}
+                  url={url}
                 />
               ))
             : "Loading..."}
