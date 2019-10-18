@@ -1,0 +1,13 @@
+.btn-read-more {
+  display: flex;
+  padding: 0.8em 1.5em;
+  font-size: 0.8em;
+  font-family: "Salsa", cursive;
+  background: #ffffff;
+  border: 0.6px solid rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+  border-radius: 4px;
+  .icon {
+    margin-left: 0.5em;
+  }
+}

@@ -1,47 +1,44 @@
 .starship {
-  width: 25%;
-  margin: 2em;
-  background-color: rgb(243, 243, 243);
   img {
     width: 100%;
-    height: 20em;
+    height: 12em;
+    border-radius: 10px 10px 0px 0px;
     object-fit: cover;
   }
   &__card {
-    padding: 1.2em;
-    box-shadow: inset 10px -10px 2px -2px rgb(214, 214, 214);
+    padding: 0.7em;
+    border-radius: 0px 0px 10px 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     &__info {
+      margin-bottom: 2em;
       p {
         margin: 0;
         padding: 0;
       }
       .title {
-        font-size: 1.5em;
+        font-size: 1.2em;
+        font-family: 'Red Hat Text', sans-serif;
+        font-weight: 600;
         color: black;
-        text-align: left;
+        text-align: center;
         padding: 0;
-        margin-bottom: 0.5em;
+        margin-bottom: 1em;
       }
       .description {
         text-align: justify;
+        font-family: 'Red Hat Text', sans-serif;
         margin-bottom: 1em;
+        font-size: 0.8em;
+        text-align: center;
+        strong {
+          font-weight: 600;
+        }
       }
     }
     .btn-wrap {
-        display: flex;
-        justify-content: flex-end;
-      button {
-        display: flex;
-        padding: 1.2em 2em;
-        font-size: 1em;
-        border: none;
-        margin-right: 1px;
-        margin-top: 1em;
-        background-color: rgb(177, 177, 177);
-        .icon {
-          margin-left: 0.5em;
-        }
-      }
+      display: flex;
+      justify-content: center;
+      margin-top: 1em;
     }
   }
 }

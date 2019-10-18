@@ -2,28 +2,29 @@ import React from "react";
 import { Link } from "react-router-dom";
 import starship from "../../assets/starship-1.jpg";
 import "./Starships.scss";
+import ReadMore from "../ReadMore";
+import Skeleton from 'react-loading-skeleton';
 
 const Starships = ({ img, model, capacity, name, url }) => {
   return (
     <div className="starship">
-      <img src={starship} alt="" />
+      {name ? <img src={starship} alt="" />: <Skeleton  height={192}/>}
       <div className="starship__card">
         <div className="starship__card__info">
-          <p className="title">{name}</p>
+          <p className="title">{name || <Skeleton />}</p>
           <p className="description">
-            <strong>Model : </strong> {model}
+            {capacity ? (<><strong>Model: </strong> {model}</>) :
+            <Skeleton/>}
           </p>
           <p className="description">
-            <strong>Cargo capacity : </strong> {capacity}
+            {capacity ? (<><strong>Cargo capacity : </strong> {capacity}</>) :
+            <Skeleton/>}
           </p>
         </div>
         <div className="btn-wrap">
-          <Link to={`starship/${url && url.split('/')[5]}`}>
-            <button>
-              <span>Read More</span>
-              <span className="icon">></span>
-            </button>
-          </Link>
+          {url && <Link to={`/starship/${url && url.split("/")[5]}`}>
+            <ReadMore />
+          </Link>}
         </div>
       </div>
     </div>

@@ -5,7 +5,10 @@
   .slide {
     display: flex;
     transition: transform 0.9s ease;
- 
+    .starship {
+      width: 25%;
+      margin: 0em 1em 2em;
+    }
   }
   .radiowrap {
     display: flex;

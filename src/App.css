@@ -14,3 +14,7 @@ button, input, a, select {
 a, button {
   cursor: pointer;
 }
+
+a {
+  text-decoration: none;
+}
