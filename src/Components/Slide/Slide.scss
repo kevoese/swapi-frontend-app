@@ -9,6 +9,11 @@
       width: 25%;
       margin: 0em 1em 2em;
     }
+    .character {
+      width: 35%;
+      min-width: 300px;
+      margin: 0em 1em 2em;
+    }
     @media screen and (max-width: 950px) {
       display: grid;
       width: 100% !important;
