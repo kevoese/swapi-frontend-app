@@ -1,22 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./StarshipView.scss";
 import starshipImg from "../../assets/starship-1.jpg";
 import Slide from "../../Components/Slide";
 import Starships from "../../Components/Starship";
 import logo from "../../assets/logo.png";
-import Paginator from "../../Components/Paginator";
+import { axiosCall } from "../../utils";
 
-const StarshipView = () => {
+const StarshipView = ({ match }) => {
+  const [starship, setStarship] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    (async () => {
+      const content = await axiosCall({
+        url: `https://swapi.co/api/starships/${match.params.id}/`
+      });
+      isMounted && setStarship(content);
+    })();
+    return () => isMounted = false;
+  }, [match.params.id]);
+
   return (
     <div className="starship-view">
       <div className="starship-view__img">
         <img src={starshipImg} alt="" />
-        <span className="starship-view__img__logo">
+        <Link to='/' className="starship-view__img__logo">
           <img src={logo} alt="" />
-        </span>
+        </Link>
         <div className="title-wrap">
           <div className="edge1"></div>
-          <h2>Cornellian Scout</h2>
+          <h2>{starship ? starship.name : "Loading.."}</h2>
           <div className="edge2"></div>
         </div>
         <div className="arrows">
@@ -51,47 +65,36 @@ const StarshipView = () => {
         </div>
       </div>
       <div className="starship-view__content">
-        <h2>Cornellian Scout</h2>
+        <h2>{starship ? starship.name : "Loading.."}</h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo
-          voluptatum blanditiis sapiente quas possimus, ab dolorem autem illo!
-          Ipsum minima officia, accusamus voluptatem perferendis alias natus
-          laudantium. Odit, esse eligendi? Lorem ipsum, dolor sit amet
-          consectetur adipisicing elit. Nemo ad maiores facere, quis inventore
-          ut eaque dolorem cum asperiores odit animi harum mollitia repudiandae
-          libero minima consequatur adipisci, similique ratione. Lorem ipsum
-          dolor sit amet consectetur, adipisicing elit. Consequuntur, suscipit
-          vel! Explicabo aut molestiae mollitia eos vero esse? Inventore harum
-          ad neque reprehenderit voluptate culpa expedita vitae minima velit
-          cupiditate? Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Quo voluptatum blanditiis sapiente quas possimus, ab dolorem autem
-          illo! Ipsum minima officia, accusamus voluptatem perferendis alias
-          natus laudantium. Odit, esse eligendi? Lorem ipsum, dolor sit amet
-          consectetur adipisicing elit. Nemo ad maiores facere, quis inventore
-          ut eaque dolorem cum asperiores odit animi harum mollitia repudiandae
-          libero minima consequatur adipisci, similique ratione. Lorem ipsum
-          dolor sit amet consectetur, adipisicing elit. Consequuntur, suscipit
-          vel! Explicabo aut molestiae mollitia eos vero esse? Inventore harum
-          ad neque reprehenderit voluptate culpa expedita vitae minima velit
-          cupiditate? Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Quo voluptatum blanditiis sapiente quas possimus, ab dolorem autem
-          illo! Ipsum minima officia, accusamus voluptatem perferendis alias
-          natus laudantium. Odit, esse eligendi? Lorem ipsum, dolor sit amet
-          consectetur adipisicing elit. Nemo ad maiores facere, quis inventore
-          ut eaque dolorem cum asperiores odit animi harum mollitia repudiandae
-          libero minima consequatur adipisci, similique ratione. Lorem ipsum
-          dolor sit amet consectetur, adipisicing elit. Consequuntur, suscipit
-          vel! Explicabo aut molestiae mollitia eos vero esse? Inventore harum
-          ad neque reprehenderit voluptate culpa expedita vitae minima velit
-          cupiditate?
+          <strong>Manufacturer : </strong>
+          {starship && starship.manufacturer}
+        </p>
+        <p>
+          <strong>Model : </strong>
+          {starship && starship.model}
+        </p>
+        <p>
+          <strong>Starship Class : </strong>
+          {starship && starship.starship_class}
+        </p>
+        <p>
+          <strong>Hyper drive rating : </strong>
+          {starship && starship.hyperdrive_rating}
+        </p>
+        <p>
+          <strong>Cargo capacity : </strong>
+          {starship && starship.cargo_capacity}
+        </p>
+        <p>
+          <strong>Crew : </strong>
+          {starship && starship.crew}
         </p>
       </div>
       <div className="recently-viewed">
         <div className="recently-viewed__title">
-            <h2>
-                Recently viewed Starships
-            </h2>
-            <div className="line"></div>
+          <h2>Recently viewed Starships</h2>
+          <div className="line"></div>
         </div>
         <Slide>
           <Starships />

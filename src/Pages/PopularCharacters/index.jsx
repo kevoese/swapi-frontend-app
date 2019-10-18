@@ -11,22 +11,19 @@ const PopularCharacters = () => {
   const [charactersInfo, setCharactersInfo] = useState(null);
   const [url, setUrl] = useState("https://swapi.co/api/people/?format=json");
 
-  const fetchData = async () => {
-    setPageData(null);
+  useEffect(() => {
+    let isMounted = true;
+   (async () => {
+    isMounted && setPageData(null);
     const starships = await axiosCall({
       url
     });
-    setPageData(starships.results);
-    setCharactersInfo(starships);
-  };
+    isMounted && setPageData(starships.results);
+    isMounted && setCharactersInfo(starships);
+  })();
 
-  useEffect(() => {
-    fetchData();
+  return () => isMounted = false;
   }, [url]);
-
-  useEffect(() => {
-    pageData && console.log({ count: pageData });
-  }, [pageData]);
 
 
   return (

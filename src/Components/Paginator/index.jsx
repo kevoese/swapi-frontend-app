@@ -4,31 +4,28 @@ import './Paginator.scss';
 const Paginator = ({ count, setUrl, prev, next, loading }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [pageTitle, setPageTitle] = useState('');
-  
- 
 
-  const handlePagination = (e) => {
-    const type = e.target.id;
-    if(type === 'foward_btn') {
+  const handleForwardPagination = (e) => {
       setCurrentPage(currentPage => currentPage + 1);
-      next && setUrl(next)
-    }
-    else {
-      setCurrentPage(currentPage => currentPage - 1);
-      prev && setUrl(prev)
-    }
+      console.log('current page on fwd click', currentPage + 1);
+      next && setUrl(next);
   }
 
-  const handlePageName = () => {
-    const first = currentPage * 10;
-    const last = first + 10;
-    setPageTitle(`${first} - ${last > count ? count :last} of ${count}`);
+  const handleBackwardPagination = (e) => {
+      setCurrentPage(currentPage => currentPage - 1);
+      prev && setUrl(prev);
+      console.log('current page on back click', currentPage - 1);
   }
 
   useEffect(() => {
-    console.log({currentPage, next})
-      handlePageName();
-      
+    let isMounted = true;
+    (() => {
+        const first = currentPage * 10;
+        const last = first + 10 > count ? count : first + 10;
+        isMounted && setPageTitle(`${first} - ${last} of ${count}`);
+      })();
+ 
+    return () => isMounted = false;
   }, [currentPage, count]);
  
   return (
@@ -36,7 +33,7 @@ const Paginator = ({ count, setUrl, prev, next, loading }) => {
       <p className="pageTitle">
         {pageTitle}
       </p>
-      <button onClick={handlePagination} disabled={loading || !prev} id="backward_btn" className={`left ${!prev ? 'lighten' : ''}`}>
+      <button onClick={handleBackwardPagination} disabled={loading || !prev} className={`left ${!prev ? 'lighten' : ''}`}>
         <svg
           width="20"
           height="20"
@@ -50,7 +47,7 @@ const Paginator = ({ count, setUrl, prev, next, loading }) => {
           />
         </svg>
       </button>
-      <button onClick={handlePagination} disabled={loading || !next} id="foward_btn" className={`right ${!next ? 'lighten' : ''}`}>
+      <button onClick={handleForwardPagination} disabled={loading || !next} className={`right ${!next ? 'lighten' : ''}`}>
         <svg
           width="20"
           height="20"
