@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./PlanetView.scss";
-import planetImg from "../../assets/planet-1.jpg";
 import Slide from "../../Components/Slide";
 import Planet from "../../Components/Planet";
 import logo from "../../assets/logo.png";
-import { axiosCall } from "../../utils";
+import { axiosCall, getPlanetImg } from "../../utils";
 
 const PlanetView = ({ match }) => {
   const [planet, setPlanet] = useState(null);
@@ -31,8 +30,7 @@ const PlanetView = ({ match }) => {
       <div
         className="planet-view__img"
         style={{
-          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.4) 99.99%, rgba(255, 255, 255, 0) 100%), url(${planetImg}) no-repeat center`,
-          backgroundSize: "cover"
+          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.4) 99.99%, rgba(255, 255, 255, 0) 100%), url(${getPlanetImg(planet && planet.climate)}) no-repeat center`,
         }}
       >
         <Link to="/" className="planet-view__img__logo">
@@ -82,13 +80,14 @@ const PlanetView = ({ match }) => {
         </div>
         <Slide>
           {planetSlide.map(
-                ({ population, name, gravity, url }, index) => (
+                ({ population, name, gravity, climate, url }, index) => (
                   <Planet
                     gravity={gravity}
                     name={name}
                     population={population}
                     key={index}
                     url={url}
+                    climate={climate}
                     img="https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg"
                   />
                 )

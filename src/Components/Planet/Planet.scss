@@ -1,38 +1,52 @@
-.planet, .planet-skeleton {
-    width: 25%;
-    margin: 2em 1em;
-    height: 20em;
-    border-radius: 10px;
-    position: relative;
-    display: flex;
-    flex-flow: column;
-    justify-content: flex-end;
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    .text {
-        font-size: 1.3em;
-        color: white;
-        text-align: center;
-        margin: 0.7em auto;
-        font-family: "Salsa", cursive;
-    }
-    .population {
-        margin: 0 auto;
-        color: white;
-        padding: 0;
-        font-size: 1em;
-        font-family: "Red Hat Text", serif;
-    }
-    .gravity {
-        margin: 0;
-        position: absolute;
-        left: 0.5em;
-        color: white;
-        top: 0.5em;
-        font-family: "Salsa", cursive;
-    }
+.planet,
+.planet-skeleton {
+  width: 25%;
+  margin: 2em 1em;
+  height: 20em;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  @media screen and (max-width: 950px) {
+    width: auto;
+  }
+  .text {
+    font-size: 1.3em;
+    color: white;
+    text-align: center;
+    margin: 0.7em auto;
+    font-family: "Salsa", cursive;
+    transition: transform 0.3s ease;
+  }
+  .population {
+    margin: 0 auto;
+    color: white;
+    padding: 0;
+    font-size: 1em;
+    font-family: "Red Hat Text", serif;
+  }
+  .gravity {
+    margin: 0;
+    position: absolute;
+    left: 0.5em;
+    color: white;
+    top: 0.5em;
+    font-family: "Salsa", cursive;
+  }
 }
 
 .planet-skeleton {
-    width: 35%;
+  width: 35%;
+}
+
+.planetHover{
+    &:hover{
+         p {
+           text-shadow: 3px 3px 9px rgb(170, 203, 253);
+           transform: scale(1.4);
+         }
+    }  
 }

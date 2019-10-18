@@ -1,36 +1,44 @@
 .paginator {
   display: flex;
   justify-content: center;
-   
+  align-items: center;
+  margin-top: 2em;
   .pageTitle {
     color: rgb(190, 190, 190);
     margin-right: 1.2em;
-    font-size: 1.7em;
+    margin: 0 2em;
+    font-size: 1em;
   }
 
+  .right, .left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8em 1em;
+    font-size: 0.8em;
+    font-family: "Salsa", cursive;
+    background: #ffffff;
+    border: 0.6px solid rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+    border-radius: 4px;
+    span {
+      font-size: 1em;
+      font-family: 'Salsa' cursive;
+      margin-right: 1em;
+    }
+
+  }
   .left {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1.4em 1.8em;
-    border: 3px solid rgb(190, 190, 190);
-    border-radius: 1em 0em 0em 1em;
-    border-right-width: 1px;
-    background-color: transparent;
-  }
-
-  .right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1.4em 1.8em;
-    border: 3px solid rgb(190, 190, 190);
-    border-radius: 0em 1em 1em 0em;
-    border-left-width: 1px;
-    background-color: transparent;
+    span {
+      margin-left: 1em;
+    }
   }
 
   .lighten {
+    border: 0.6px solid rgb(190, 190, 190);
+    span {
+      color: rgb(190, 190, 190)
+    }
       svg {
           path {
               fill: rgb(190, 190, 190) !important;
