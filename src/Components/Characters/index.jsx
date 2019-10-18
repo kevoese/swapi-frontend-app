@@ -12,7 +12,7 @@ const Characters = ({ name, year, gender, url }) => {
         <img src={charactersImg(gender)} alt="" />
       ) : (
         <div className="img-loader">
-          <Skeleton height={288} />
+          <Skeleton height={'18em'} />
         </div>
       )}
       <div className="character__card">

@@ -3,16 +3,19 @@
   &__img {
     height: 600px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: left;
     position: relative;
     background-size: cover !important;
     .title-wrap {
       display: flex;
       align-items: center;
-      position: absolute;
-      left: 10%;
-      bottom: 10%;
+      margin-left: 10%;
+      margin-bottom: 4em;
+      @media screen and (max-width: 800px) {
+        margin: auto auto 4em;
+      }
       .edge1 {
         border: 3px solid white;
         width: 2em;
@@ -35,14 +38,16 @@
       }
     }
     &__logo {
-      position: absolute;
+      margin-top: 2em;
+      margin-left: 2em;
       img {
         height: 3em;
         object-fit: contain;
         margin-right: 1em;
       }
-      left: 2em;
-      top: 2em;
+      @media screen and (max-width: 450px) {
+        height: 2em;
+      }
     }
   }
   &__content {
