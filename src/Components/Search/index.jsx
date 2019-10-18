@@ -14,9 +14,9 @@ const Search = ({ handleChange, loading }) => {
         <img src={logo} alt="" />
         <p>Directory</p>
       </div>
-      <div className="search__info">
+      <p className="search__info">
         Find your favourite Characters, Films, Species, Starships and Planets
-      </div>
+      </p>
       <div className="search__input-wrap">
         <input
           type="text"

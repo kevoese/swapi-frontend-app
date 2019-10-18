@@ -15,6 +15,9 @@
       height: 3em;
       object-fit: contain;
       margin-right: 1em;
+      @media screen and (max-width: 450px) {
+        height: 2em;
+      }
     }
     left: 2em;
     top: 2em;
@@ -43,14 +46,15 @@
   &__info {
     text-align: center;
     margin: 1.2em auto;
-    width: 22em;
+    max-width: 22em;
     font-size: 1.2em;
     font-family: Arial, Helvetica, sans-serif;
   }
   &__input-wrap {
-      width: 70%;
-      max-width: 700px;
-      position: relative;
+    width: 70%;
+    max-width: 700px;
+    min-width: 20em;
+    position: relative;
     &__input {
       padding: 1em 2em 1em 6em;
       width: 100%;
@@ -62,14 +66,17 @@
       background-size: 3.5%;
       background-color: rgb(252, 252, 252);
     }
-    
+
     .loader {
-        position: absolute;
-        height: 2em;
-        width: 2em;
-        right: 1em;
-        top: 50%;
-        transform: translateY(-50%);
+      position: absolute;
+      height: 2em;
+      width: 2em;
+      right: 1em;
+      top: 50%;
+      transform: translateY(-50%);
     }
+  }
+  @media screen and (max-width: 450px) {
+    font-size: 0.8em;
   }
 }

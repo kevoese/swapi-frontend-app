@@ -1,52 +1,55 @@
 .popular {
+  text-align: center;
+  padding: 2em;
+  margin: 2em 0;
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20em, 22em));
+    grid-gap: 4em;
+    justify-content: center;
+    @media screen and (max-width: 450px) {
+        font-size: 0.8em;
+      }
+  }
+  .character-contain {
+    grid-template-columns: repeat(auto-fit, minmax(25em, 34em));
+    justify-content: center;
+  }
+  &__title {
     text-align: center;
-    padding: 2em 4em ;
-    margin: 2em 0;
-    .container {
-        display: grid;
-        grid-template-columns: repeat( auto-fit, minmax(20em, 22em) );
-        grid-gap: 4em;
-        justify-content: center;
+    margin: 0 auto 2em auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    p {
+      font-size: 1.7em;
+      font-weight: 600;
+      font-family: "Red Hat Display" serif;
+      margin: 0.5em 0;
+      padding: 0;
     }
-    .character-contain {
-        grid-template-columns: repeat( auto-fit, minmax(30em, 34em) );
-        justify-content: center;
+    div {
+      width: 6em;
+      height: 0.5em;
+      background-color: black;
     }
-    &__title {
-        text-align: center;
-        margin: 0 auto 2em auto;
-        display: flex;
-        flex-flow: column;
-        justify-content: center;
-        align-items: center;
-        p {
-            font-size: 1.7em;
-            font-weight: 600;
-            font-family: 'Red Hat Display' serif;
-            margin: 0.5em 0;
-            padding: 0;
-        }
-        div {
-            width: 6em;
-            height: 0.5em;
-            background-color: black;
-        }
-    }
-    &__view-more {
-        margin: 3.7em auto 0;
-        width: 30em;
-        padding: 1.2em;
-        font-size: 0.9em;
-        font-weight: bold;
-        border: 2px solid black;
-        border-radius: none;
-        background-color: transparent;
-        border-radius: 0.4em;
-        font-family: 'Salsa', cursive;
-    }
-    .not-found {
-        font-size: 1.3em;
-        font-family: "Salsa", cursive;
-        color: rgb(0, 6, 37);
-    }
+  }
+  &__view-more {
+    margin: 3.7em auto 0;
+    width: 10em;
+    padding: 1.2em;
+    font-size: 0.9em;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: none;
+    background-color: transparent;
+    border-radius: 0.4em;
+    font-family: "Salsa", cursive;
+  }
+  .not-found {
+    font-size: 1.3em;
+    font-family: "Salsa", cursive;
+    color: rgb(0, 6, 37);
+  }
 }

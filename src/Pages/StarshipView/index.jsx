@@ -37,36 +37,6 @@ const StarshipView = ({ match }) => {
           <h2>{starship ? starship.name : "Loading.."}</h2>
           <div className="edge2"></div>
         </div>
-        <div className="arrows">
-          <div className="left">
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 58 75"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M39.5764 60.9852L39.6672 13.7252L7.75655 36.4325L39.5764 60.9852Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-          <div className="right">
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 56 75"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M17.7883 60.9852L17.7007 13.7252L48.5109 36.4325L17.7883 60.9852Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-        </div>
       </div>
       <div className="starship-view__content">
         <h2>{starship ? starship.name : "Loading.."}</h2>
