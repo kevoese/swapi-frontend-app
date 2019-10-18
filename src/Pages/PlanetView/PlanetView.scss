@@ -8,6 +8,9 @@
     align-items: left;
     position: relative;
     background-size: cover !important;
+    @media screen and (max-width: 450px) {
+      font-size: 0.8em;
+    }
     .title-wrap {
       display: flex;
       align-items: center;
@@ -41,7 +44,7 @@
      margin-top: 2em;
      margin-left: 2em;
       img {
-        height: 3em;
+        height: 2em;
         object-fit: contain;
         margin-right: 1em;
       }

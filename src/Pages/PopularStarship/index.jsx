@@ -10,25 +10,45 @@ const PopularStarships = () => {
   const [starshipInfo, setStarshipInfo] = useState(null);
   const [url, setUrl] = useState("https://swapi.co/api/starships/?format=json");
 
+  const [search, setSearch] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [reset, setReset] = useState(false);
+
+  const handleSearchChange = e => {
+    const str = e.target.value.trim();
+    if (str !== "") {
+      setSearch(str);
+      setReset(true);
+      setUrl(`https://swapi.co/api/starships/?format=json&search=${str}`);
+      setReset(false)
+    }
+    else {
+      setSearch(null);
+      setUrl("https://swapi.co/api/starships/?format=json")
+    }
+  };
+
   useEffect(() => {
     let isMounted = true;
     (async () => {
       if (isMounted) {
         setPageData([{}, {}, {}]);
+        search ? setLoading(true) : setLoading(false);
         const starships = await axiosCall({
           url
         });
         setPageData(starships.results);
         setStarshipInfo(starships);
+        search && setLoading(false);
       }
     })();
     return () => (isMounted = false);
-  }, [url]);
+  }, [url, search]);
 
   return (
     <div>
-      <Search />
-      <Popular name="Starships" hideViewMore>
+      <Search handleChange={handleSearchChange} loading={loading} />
+      <Popular search={search} name="Starships" hideViewMore>
         <div className="container">
           {pageData.map(
             ({ model, name, cargo_capacity, url, starship_class }, index) => (
@@ -43,7 +63,7 @@ const PopularStarships = () => {
             )
           )}
         </div>
-        {starshipInfo ? (
+        {starshipInfo || reset ? (
           <Paginator
             loading={pageData ? false : true}
             setUrl={setUrl}

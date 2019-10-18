@@ -4,6 +4,7 @@
         padding: 2em;
         width: 88%;
         margin: 0 auto;
+       
         label {
             font-size: 1.3em;
             text-transform: uppercase;
@@ -18,7 +19,12 @@
             border-radius: 0.4em;
             color: grey;
         }
-
+        @media screen and (max-width: 500px) {
+            font-size: 0.8em;
+            label, select {
+                margin: 1em;
+            }
+        }
         .gender-wrap {
             margin:0 auto;
         }
