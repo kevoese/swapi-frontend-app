@@ -1,7 +1,7 @@
 .slide-container {
   margin: 0 auto;
   overflow: hidden;
-  width: 88%;
+  // width: 88%;
   .slide {
     display: flex;
     transition: transform 0.9s ease;
@@ -17,7 +17,7 @@
     @media screen and (max-width: 950px) {
       display: grid;
       width: 100% !important;
-      grid-template-columns: repeat(auto-fit, minmax(20em, 22em));
+      grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
       grid-gap: 4em;
       justify-content: center;
     }

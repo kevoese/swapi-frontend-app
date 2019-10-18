@@ -21,28 +21,30 @@ const Home = () => {
   };
 
   useEffect(() => {
+    let isMounted = true;
     (async () => {
-      search ? setLoading(true) : setLoading(false);
+      isMounted && search ? setLoading(true) : setLoading(false);
       const starships = await axiosCall({
         url: `https://swapi.co/api/starships/?format=json${
           search ? `&search=${search}` : ""
         }`
       });
-      setStarships(starships.results.slice(0, 6));
+      isMounted && setStarships(starships.results.slice(0, 6));
       const characters = await axiosCall({
         url: `https://swapi.co/api/people/?format=json${
           search ? `&search=${search}` : ""
         }`
       });
-      setCharacters(characters.results.slice(0, 4));
+      isMounted && setCharacters(characters.results.slice(0, 4));
       const planets = await axiosCall({
         url: `https://swapi.co/api/planets/?format=json${
           search ? `&search=${search}` : ""
         }`
       });
-      setPlanets(planets.results.slice(0, 9));
-      search && setLoading(false);
+      isMounted && setPlanets(planets.results.slice(0, 9));
+      isMounted && search && setLoading(false);
     })();
+    return () => isMounted = false;
   }, [search]);
 
   return (

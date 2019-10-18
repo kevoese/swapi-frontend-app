@@ -1,19 +1,22 @@
 .popular {
   text-align: center;
-  padding: 2em;
+  padding: 2em 4em;
   margin: 2em 0;
+  @media screen and (max-width: 450px) {
+    padding: 2em;
+  }
   .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20em, 22em));
+    grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
     grid-gap: 4em;
-    justify-content: center;
+    justify-content: space-between;
     @media screen and (max-width: 450px) {
         font-size: 0.8em;
       }
   }
   .character-contain {
-    grid-template-columns: repeat(auto-fit, minmax(25em, 34em));
-    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(25em, 1fr));
+    justify-content: space-between;
   }
   &__title {
     text-align: center;

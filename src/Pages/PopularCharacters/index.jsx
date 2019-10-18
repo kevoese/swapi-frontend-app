@@ -11,33 +11,56 @@ const PopularCharacters = () => {
   const [charactersInfo, setCharactersInfo] = useState(null);
   const [url, setUrl] = useState("https://swapi.co/api/people/?format=json");
   const selectRef = useRef();
-  const [rawData, setRawData] = useState([null]);
+  const [rawData, setRawData] = useState(null);
+
+  const [search, setSearch] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [reset, setReset] = useState(false);
+
+  const handleSearchChange = e => {
+    const str = e.target.value.trim();
+    if (str !== "") {
+      setSearch(str);
+      setReset(true);
+      setUrl(`https://swapi.co/api/people/?format=json&search=${str}`);
+      setReset(false)
+    }
+    else {
+      setSearch(null);
+      setUrl("https://swapi.co/api/people/?format=json")
+    }
+  };
 
   useEffect(() => {
     let isMounted = true;
     (async () => {
       isMounted && setPageData([{}, {}]);
+      search ? setLoading(true) : setLoading(false);
       const starships = await axiosCall({
         url
       });
+
       isMounted && setRawData(starships.results);
       isMounted &&
         setPageData(handleFilter(starships.results, selectRef.current.value));
       isMounted && setCharactersInfo(starships);
+      search && setLoading(false);
     })();
 
     return () => (isMounted = false);
-  }, [url]);
+  }, [url, search]);
 
   const handleChange = e => {
-    const filtered = handleFilter(rawData, e.target.value);
-    setPageData(filtered);
+    if (rawData) {
+      const filtered = handleFilter(rawData, e.target.value);
+      setPageData(filtered);
+    }
   };
 
   return (
     <div className="popular-characters">
-      <Search />
-      <Popular name="Characters" hideViewMore>
+      <Search handleChange={handleSearchChange} loading={loading} />
+      <Popular search={search} name="Characters" hideViewMore>
         <div className="filters">
           <div className="gender-wrap">
             <label htmlFor="gender_select">FILTER</label>
@@ -72,7 +95,7 @@ const PopularCharacters = () => {
               ))
             : "Loading..."}
         </div>
-        {charactersInfo ? (
+        {charactersInfo || reset ? (
           <Paginator
             loading={pageData ? false : true}
             setUrl={setUrl}
