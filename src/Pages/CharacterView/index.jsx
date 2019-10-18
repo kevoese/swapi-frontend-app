@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./CharacterView.scss";
-import characterImg from "../../assets/character-1.jpg";
 import Slide from "../../Components/Slide";
 import Characters from "../../Components/Characters";
 import logo from "../../assets/logo.png";
-import { axiosCall } from "../../utils";
+import { axiosCall, charactersImg } from "../../utils";
 
 const CharacterView = ({ match }) => {
   const [character, setCharacter] = useState(null);
-  const [characterSlide, setCharacterSlide] = useState(null);
+  const [characterSlide, setCharacterSlide] = useState([{},{},{}]);
 
   useEffect(() => {
     let isMounted = true;
@@ -32,13 +31,11 @@ const CharacterView = ({ match }) => {
       <div
         className="character-view__img"
         style={{
-          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.4) 99.99%, rgba(255, 255, 255, 0) 100%), url(${characterImg}) no-repeat center`,
-          backgroundSize: "cover"
+          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.4) 99.99%, rgba(255, 255, 255, 0) 100%), url(${charactersImg(character && character.gender)}) no-repeat center`
         }}
       >
-        {/* <img className="people" src={characterImg} alt="" /> */}
         <Link to="/" className="character-view__img__logo">
-          <img className src={characterImg(character && character.gender)} alt="" />
+          <img src={logo} alt="" />
         </Link>
         <div className="title-wrap">
           <div className="edge1"></div>

@@ -46,7 +46,12 @@ export const getImg = starshipClass => {
 };
 
 export const getPlanetImg = climate => {
-  const str = climate && climate.toLowerCase().split(',')[0].trim();
+  const str =
+    climate &&
+    climate
+      .toLowerCase()
+      .split(",")[0]
+      .trim();
   switch (str) {
     case "temperate":
       return planet3;
@@ -68,3 +73,14 @@ export const charactersImg = gender => {
   }
 };
 
+export const handleFilter = (arr, filterBy) => {
+  if (filterBy === "all" || filterBy === "choose") return arr;
+  if (filterBy === "others") {
+    let res = arr.filter(
+      ({ gender }) => gender !== "male" && gender !== "female"
+    );
+    return res;
+  }
+  const filtered = arr.filter(({ gender }) => gender === filterBy);
+  return filtered;
+};

@@ -3,7 +3,7 @@ import Popular from "../../Components/Popular";
 import Characters from "../../Components/Characters";
 import Search from "../../Components/Search";
 import Paginator from "../../Components/Paginator";
-import { axiosCall } from "../../utils";
+import { axiosCall, handleFilter } from "../../utils";
 import "./PopularCharacters.scss";
 
 const PopularCharacters = () => {
@@ -12,19 +12,6 @@ const PopularCharacters = () => {
   const [url, setUrl] = useState("https://swapi.co/api/people/?format=json");
   const selectRef = useRef();
   const [rawData, setRawData] = useState([null]);
-
-  const handleFilter = (arr, filterBy) => {
-    if (filterBy === "all" || filterBy === "choose") return arr;
-    if (filterBy === "others") {
-      let res = arr.filter(
-        ({ gender }) => gender !== "male" && gender !== "female"
-      );
-      return res;
-    }
-
-    const filtered = arr.filter(({ gender }) => gender === filterBy);
-    return filtered;
-  };
 
   useEffect(() => {
     let isMounted = true;
