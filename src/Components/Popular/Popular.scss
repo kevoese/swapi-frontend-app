@@ -3,8 +3,13 @@
     padding: 2em ;
     margin: 2em 0;
     .container {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat( auto-fit, minmax(20em, 22em) );
+        grid-gap: 2em;
+        justify-content: center;
+    }
+    .character-contain {
+        grid-template-columns: repeat( auto-fit, minmax(30em, 34em) );
         justify-content: center;
     }
     &__title {
@@ -27,8 +32,8 @@
         }
     }
     &__view-more {
-        margin: 3.7em auto;
-        width: 40em;
+        margin: 3.7em auto 0;
+        width: 30em;
         padding: 1.2em;
         font-size: 0.9em;
         font-weight: bold;
@@ -36,5 +41,6 @@
         border-radius: none;
         background-color: transparent;
         border-radius: 0.4em;
+        font-family: 'Salsa', cursive;
     }
 }

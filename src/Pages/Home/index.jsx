@@ -8,9 +8,9 @@ import Planet from "../../Components/Planet";
 import { axiosCall } from "../../utils";
 
 const Home = () => {
-  const [starshipsData, setStarships] = useState(null);
-  const [charactersData, setCharacters] = useState(null);
-  const [planetsData, setPlanets] = useState(null);
+  const [starshipsData, setStarships] = useState([{}, {}, {}]);
+  const [charactersData, setCharacters] = useState([{}, {}]);
+  const [planetsData, setPlanets] = useState([{}, {}, {}]);
 
   const fetchData = async () => {
     const starships = await axiosCall({
@@ -27,6 +27,7 @@ const Home = () => {
       url: "https://swapi.co/api/planets/?format=json"
     });
     setPlanets(planets.results.slice(0, 9));
+    
   };
 
   useEffect(() => {
@@ -36,50 +37,50 @@ const Home = () => {
   return (
     <div>
       <Search />
-      <Popular name="Starships" viewLink = "/popular-starships">
+      <Popular name="Starships" viewLink="/popular-starships">
         <div className="container">
-          {starshipsData
-            ? starshipsData.map(({ model, name, cargo_capacity, url }, index) => (
-                <Starships
-                  model={model}
-                  name={name}
-                  capacity={cargo_capacity}
-                  key={index}
-                  url={url}
-                />
-              ))
-            : "Loading..."}
+          { starshipsData && starshipsData.map(({ model, name, cargo_capacity, url }, index) => (
+            <Starships
+              model={model}
+              name={name}
+              capacity={cargo_capacity}
+              key={index}
+              url={url}
+            />
+          ))}
         </div>
       </Popular>
 
       <Popular name="Planets" hideViewMore>
         <Slide>
-          {planetsData
-            ? planetsData.map(({ population, name, temperature }, index) => (
-                <Planet
-                  temperature={temperature}
-                  name={name}
-                  population={population}
-                  key={index}
-                  img="https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg"
-                />
-              ))
-            : "Loading..."}
+          { planetsData.map(
+                ({ population, name, gravity, url }, index) => (
+                  <Planet
+                    gravity={gravity}
+                    name={name}
+                    population={population}
+                    key={index}
+                    url={url}
+                    img="https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg"
+                  />
+                )
+              )
+          }
         </Slide>
       </Popular>
 
-      <Popular name="Characters"  viewLink = "/popular-characters">
-        <div className="container">
-          {charactersData
-            ? charactersData.map(({ gender, name, birth_year }, index) => (
+      <Popular name="Characters" viewLink="/popular-characters">
+        <div className="container character-contain">
+          { charactersData.map(({ gender, name, birth_year, url }, index) => (
                 <Characters
                   year={birth_year}
                   name={name}
                   gender={gender}
                   key={index}
+                  url={url}
                 />
               ))
-            : "Loading..."}
+            }
         </div>
       </Popular>
     </div>

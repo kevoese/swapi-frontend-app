@@ -52,14 +52,15 @@ const PopularCharacters = () => {
           </div>
         </div>
 
-        <div className="container">
+        <div className="container character-contain">
         {pageData
-            ? pageData.map(({ gender, name, birth_year }, index) => (
+            ? pageData.map(({ gender, name, birth_year, url }, index) => (
                 <Characters
                   year={birth_year}
                   name={name}
                   gender={gender}
                   key={index}
+                  url={url}
                 />
               ))
             : "Loading..."}

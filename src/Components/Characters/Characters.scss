@@ -1,13 +1,13 @@
 .character {
   display: flex;
-  width: 40%;
   margin: 2em;
-  background-color: rgb(243, 243, 243);
-  height: 25em;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px 10px 10px 10px;
   img, .img-loader {
     width: 60%;
-    height: 25em;
+    height: 18em;
     object-fit: cover;
+    border-radius: 10px 0px 0px 10px;
   }
   &__card {
     width: 40%;
@@ -15,31 +15,38 @@
     flex-flow: column;
     justify-content: center;
     padding: 1.5em;
+    border-top: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 0px 10px 10px 0px;
+    background-color: white;
     p {
       padding: 0;
       margin: 0;
     }
     .title {
-        margin-bottom: 2em;
+        margin-bottom: 1em;
         text-align: left;
       .name {
         font-size: 1.1em;
         font-weight: bold;
       }
     }
-
     .description {
-        p {
+      p {
         text-align: left;
         margin: 1em 0;
         }
-        .read-more {
-            text-align: left;
-          a {
-              font-weight: bold;
-              border-bottom: 2px solid black;
-          }
-        }
+      text-align: justify;
+      font-family: 'Red Hat Text', sans-serif;
+      font-size: 0.8em;
+      text-align: center;
+      strong {
+        font-weight: 600;
+      }
+    }
+
+    .read-more {
+      text-align: left;
+      margin-top: 2em;
     }
   }
 }

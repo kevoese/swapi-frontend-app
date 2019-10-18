@@ -9,6 +9,7 @@ import { axiosCall } from "../../utils";
 
 const StarshipView = ({ match }) => {
   const [starship, setStarship] = useState(null);
+  const [starshipSlide, setStarshipSlide] = useState([{},{},{},{},{},{}]);
 
   useEffect(() => {
     let isMounted = true;
@@ -17,6 +18,10 @@ const StarshipView = ({ match }) => {
         url: `https://swapi.co/api/starships/${match.params.id}/`
       });
       isMounted && setStarship(content);
+      const starships = await axiosCall({
+        url: "https://swapi.co/api/starships/?format=json"
+      });
+      isMounted && setStarshipSlide(starships.results.slice(0, 9));
     })();
     return () => isMounted = false;
   }, [match.params.id]);
@@ -97,19 +102,15 @@ const StarshipView = ({ match }) => {
           <div className="line"></div>
         </div>
         <Slide>
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
-          <Starships />
+        { starshipSlide.map(({ model, name, cargo_capacity, url }, index) => (
+            <Starships
+              model={model}
+              name={name}
+              capacity={cargo_capacity}
+              key={index}
+              url={url}
+            />
+          ))}
         </Slide>
       </div>
     </div>

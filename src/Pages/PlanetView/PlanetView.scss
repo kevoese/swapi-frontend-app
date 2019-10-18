@@ -1,0 +1,90 @@
+.planet-view {
+    position: relative;
+    &__img {
+      height: 600px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+  
+      .title-wrap {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        left: 10%;
+        bottom: 10%;
+        .edge1 {
+          border: 3px solid white;
+          width: 2em;
+          height: 5em;
+          border-right: none;
+        }
+        h2 {
+          font-size: 1.5em;
+          font-weight: bold;
+          text-align: left;
+          color: white;
+          margin: 0;
+          font-family: "Red Hat Text", sans-serif;
+        }
+        .edge2 {
+          border: 3px solid white;
+          width: 2em;
+          height: 5em;
+          border-left: none;
+        }
+      }
+      &__logo {
+        position: absolute;
+        img {
+          height: 3em;
+          object-fit: contain;
+          margin-right: 1em;
+        }
+        left: 2em;
+        top: 2em;
+      }
+    }
+    &__content {
+      flex-grow: 1;
+      width: 50%;
+      margin: 4em auto;
+      text-align: center;
+      h2 {
+        font-size: 2em;
+        font-weight: bold;
+        font-family: "Salsa", cursive;
+        text-align: left;
+      }
+      p {
+        font-size: 1.2em;
+        color: rgb(46, 46, 46);
+        line-height: 1.5em;
+        text-align: left;
+        margin: 2em auto;
+      }
+    }
+  
+    .recently-viewed {
+      margin-bottom: 4em;
+      &__title {
+        width: 88%;
+        margin: 2em auto;
+        padding: 0 2em;
+        text-align: center;
+        h2 {
+          padding: 0.5em;
+          border: 2px solid rgb(207, 207, 207);
+          width: fit-content;
+          margin: 0.4em auto;
+          color: rgb(100, 100, 100);
+          font-family: "Salsa", cursive;
+        }
+        .line {
+          height: 2px;
+          background-color: rgb(207, 207, 207);
+        }
+      }
+    }
+  }
+  
