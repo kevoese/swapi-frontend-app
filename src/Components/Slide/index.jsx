@@ -8,7 +8,6 @@ const Slide = ({ children }) => {
   const width = set * 100;
   const handleSlide = e => {
     sliderRef.current.style.transform = `translateX(${e.target.value / set}%)`;
-    console.log(e.target.value, "event");
   };
 
   const generateRadio = number => {

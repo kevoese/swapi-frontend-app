@@ -11,77 +11,100 @@ const Home = () => {
   const [starshipsData, setStarships] = useState([{}, {}, {}]);
   const [charactersData, setCharacters] = useState([{}, {}]);
   const [planetsData, setPlanets] = useState([{}, {}, {}]);
+  const [search, setSearch] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const fetchData = async () => {
-    const starships = await axiosCall({
-      url: "https://swapi.co/api/starships/?format=json"
-    });
-    setStarships(starships.results.slice(0, 6));
-
-    const characters = await axiosCall({
-      url: "https://swapi.co/api/people/?format=json"
-    });
-    setCharacters(characters.results.slice(0, 4));
-
-    const planets = await axiosCall({
-      url: "https://swapi.co/api/planets/?format=json"
-    });
-    setPlanets(planets.results.slice(0, 9));
-    
+  const handleChange = e => {
+    const str = e.target.value.trim();
+    if (str !== "") setSearch(str);
+    else setSearch(null);
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    (async () => {
+      search ? setLoading(true) : setLoading(false);
+      const starships = await axiosCall({
+        url: `https://swapi.co/api/starships/?format=json${
+          search ? `&search=${search}` : ""
+        }`
+      });
+      setStarships(starships.results.slice(0, 6));
+      const characters = await axiosCall({
+        url: `https://swapi.co/api/people/?format=json${
+          search ? `&search=${search}` : ""
+        }`
+      });
+      setCharacters(characters.results.slice(0, 4));
+      const planets = await axiosCall({
+        url: `https://swapi.co/api/planets/?format=json${
+          search ? `&search=${search}` : ""
+        }`
+      });
+      setPlanets(planets.results.slice(0, 9));
+      search && setLoading(false);
+    })();
+  }, [search]);
 
   return (
     <div>
-      <Search />
-      <Popular name="Starships" viewLink="/popular-starships">
-        <div className="container">
-          { starshipsData && starshipsData.map(({ model, name, cargo_capacity, url }, index) => (
-            <Starships
-              model={model}
-              name={name}
-              capacity={cargo_capacity}
-              key={index}
-              url={url}
-            />
-          ))}
-        </div>
-      </Popular>
-
-      <Popular name="Planets" hideViewMore>
-        <Slide>
-          { planetsData.map(
-                ({ population, name, gravity, url }, index) => (
-                  <Planet
-                    gravity={gravity}
-                    name={name}
-                    population={population}
-                    key={index}
-                    url={url}
-                    img="https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg"
-                  />
-                )
-              )
-          }
-        </Slide>
-      </Popular>
-
-      <Popular name="Characters" viewLink="/popular-characters">
-        <div className="container character-contain">
-          { charactersData.map(({ gender, name, birth_year, url }, index) => (
-                <Characters
-                  year={birth_year}
+      <Search handleChange={handleChange} loading={loading} />
+      <Popular search={search} name="Starships" viewLink="/popular-starships">
+        {starshipsData.length > 1 ? (
+          <div className="container">
+            {starshipsData.map(
+              ({ model, name, cargo_capacity, url, starship_class}, index) => (
+                <Starships
+                  model={model}
                   name={name}
-                  gender={gender}
+                  starshipClass={starship_class}
+                  capacity={cargo_capacity}
                   key={index}
                   url={url}
                 />
-              ))
-            }
-        </div>
+              )
+            )}
+          </div>
+        ) : (
+          <p className="not-found">Sorry!! No Starshship Found.</p>
+        )}
+      </Popular>
+
+      <Popular search={search} name="Planets" hideViewMore>
+        {planetsData.length > 1 ? (
+          <Slide>
+            {planetsData.map(({ population, name, gravity, url, climate }, index) => (
+              <Planet
+                gravity={gravity}
+                name={name}
+                population={population}
+                key={index}
+                url={url}
+                climate={climate}
+                img="https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg"
+              />
+            ))}
+          </Slide>
+        ) : (
+          <p className="not-found">Sorry!! No Planet Found.</p>
+        )}
+      </Popular>
+
+      <Popular search={search} name="Characters" viewLink="/popular-characters">
+        {charactersData.length > 1 ? (
+          <div className="container character-contain">
+            {charactersData.map(({ gender, name, birth_year, url }, index) => (
+              <Characters
+                year={birth_year}
+                name={name}
+                gender={gender}
+                key={index}
+                url={url}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="not-found">Sorry!! No Character Found.</p>
+        )}
       </Popular>
     </div>
   );

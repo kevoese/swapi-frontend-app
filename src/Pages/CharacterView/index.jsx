@@ -38,7 +38,7 @@ const CharacterView = ({ match }) => {
       >
         {/* <img className="people" src={characterImg} alt="" /> */}
         <Link to="/" className="character-view__img__logo">
-          <img className src={logo} alt="" />
+          <img className src={characterImg(character && character.gender)} alt="" />
         </Link>
         <div className="title-wrap">
           <div className="edge1"></div>

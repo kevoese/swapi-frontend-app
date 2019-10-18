@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./StarshipView.scss";
-import starshipImg from "../../assets/starship-1.jpg";
 import Slide from "../../Components/Slide";
 import Starships from "../../Components/Starship";
 import logo from "../../assets/logo.png";
-import { axiosCall } from "../../utils";
+import { axiosCall, getImg } from "../../utils";
 
 const StarshipView = ({ match }) => {
   const [starship, setStarship] = useState(null);
@@ -29,7 +28,7 @@ const StarshipView = ({ match }) => {
   return (
     <div className="starship-view">
       <div className="starship-view__img">
-        <img src={starshipImg} alt="" />
+        <img src={getImg(starship && starship.starship_class)} alt="" />
         <Link to='/' className="starship-view__img__logo">
           <img src={logo} alt="" />
         </Link>
@@ -102,13 +101,14 @@ const StarshipView = ({ match }) => {
           <div className="line"></div>
         </div>
         <Slide>
-        { starshipSlide.map(({ model, name, cargo_capacity, url }, index) => (
+        { starshipSlide.map(({ model, name, cargo_capacity, url, starship_class }, index) => (
             <Starships
               model={model}
               name={name}
               capacity={cargo_capacity}
               key={index}
               url={url}
+              starshipClass={starship_class}
             />
           ))}
         </Slide>

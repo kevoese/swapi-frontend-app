@@ -1,14 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import character from "../../assets/character-1.jpg";
 import "./Characters.scss";
 import ReadMore from "../ReadMore";
 import Skeleton from "react-loading-skeleton";
+import { charactersImg } from "../../utils";
 
 const Characters = ({ name, year, gender, url }) => {
   return (
     <div className="character">
-      {name ? <img src={character} alt="" /> : <div  className="img-loader"><Skeleton height={288}/></div>}
+      {gender ? (
+        <img src={charactersImg(gender)} alt="" />
+      ) : (
+        <div className="img-loader">
+          <Skeleton height={288} />
+        </div>
+      )}
       <div className="character__card">
         <div className="title">
           <p className="name">{name || <Skeleton />}</p>

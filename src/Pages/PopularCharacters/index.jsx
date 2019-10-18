@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Popular from "../../Components/Popular";
 import Characters from "../../Components/Characters";
 import Search from "../../Components/Search";
@@ -7,24 +7,45 @@ import { axiosCall } from "../../utils";
 import "./PopularCharacters.scss";
 
 const PopularCharacters = () => {
-  const [pageData, setPageData] = useState(null);
+  const [pageData, setPageData] = useState([{}, {}]);
   const [charactersInfo, setCharactersInfo] = useState(null);
   const [url, setUrl] = useState("https://swapi.co/api/people/?format=json");
+  const selectRef = useRef();
+  const [rawData, setRawData] = useState([null]);
+
+  const handleFilter = (arr, filterBy) => {
+    if (filterBy === "all" || filterBy === "choose") return arr;
+    if (filterBy === "others") {
+      let res = arr.filter(
+        ({ gender }) => gender !== "male" && gender !== "female"
+      );
+      return res;
+    }
+
+    const filtered = arr.filter(({ gender }) => gender === filterBy);
+    return filtered;
+  };
 
   useEffect(() => {
     let isMounted = true;
-   (async () => {
-    isMounted && setPageData(null);
-    const starships = await axiosCall({
-      url
-    });
-    isMounted && setPageData(starships.results);
-    isMounted && setCharactersInfo(starships);
-  })();
+    (async () => {
+      isMounted && setPageData([{}, {}]);
+      const starships = await axiosCall({
+        url
+      });
+      isMounted && setRawData(starships.results);
+      isMounted &&
+        setPageData(handleFilter(starships.results, selectRef.current.value));
+      isMounted && setCharactersInfo(starships);
+    })();
 
-  return () => isMounted = false;
+    return () => (isMounted = false);
   }, [url]);
 
+  const handleChange = e => {
+    const filtered = handleFilter(rawData, e.target.value);
+    setPageData(filtered);
+  };
 
   return (
     <div className="popular-characters">
@@ -33,27 +54,26 @@ const PopularCharacters = () => {
         <div className="filters">
           <div className="gender-wrap">
             <label htmlFor="gender_select">FILTER</label>
-            <select name="Gender" id="gender_select">
-              <option value="Male" defaultValue>
-                Male
+            <select
+              ref={selectRef}
+              onChange={handleChange}
+              defaultValue="choose"
+              name="Gender"
+              id="gender_select"
+            >
+              <option value="choose" disabled>
+                Choose Gender
               </option>
-              <option value="Female">Female</option>
-              <option value="Others">Others</option>
-            </select>
-          </div>
-          <div className="grid-wrap">
-            <label htmlFor="grid_select">VIEW</label>
-            <select name="View" id="grid_select">
-              <option value="Grid" defaultValue>
-                Grid
-              </option>
-              <option value="FemaRowle">Row</option>
+              <option value="all">All</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="others">Others</option>
             </select>
           </div>
         </div>
 
         <div className="container character-contain">
-        {pageData
+          {pageData
             ? pageData.map(({ gender, name, birth_year, url }, index) => (
                 <Characters
                   year={birth_year}

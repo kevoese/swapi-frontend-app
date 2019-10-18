@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Popular.scss';
 
-const Popular = ({ children, name, hideViewMore, viewLink }) => {
+const Popular = ({ children,search, name, hideViewMore, viewLink }) => {
     return (
         <div className="popular">
             <div className="popular__title">
                 <p >
-                    {`Popular ${name}`}
+                    {`${search ? 'Search Results for ' :'Popular '} ${name}`}
                 </p>
                 <div>
                 </div>

@@ -6,7 +6,7 @@ import Paginator from "../../Components/Paginator";
 import { axiosCall } from "../../utils";
 
 const PopularStarships = () => {
-  const [pageData, setPageData] = useState([{},{},{}]);
+  const [pageData, setPageData] = useState([{}, {}, {}]);
   const [starshipInfo, setStarshipInfo] = useState(null);
   const [url, setUrl] = useState("https://swapi.co/api/starships/?format=json");
 
@@ -14,7 +14,7 @@ const PopularStarships = () => {
     let isMounted = true;
     (async () => {
       if (isMounted) {
-        setPageData([{},{},{}]);
+        setPageData([{}, {}, {}]);
         const starships = await axiosCall({
           url
         });
@@ -30,16 +30,18 @@ const PopularStarships = () => {
       <Search />
       <Popular name="Starships" hideViewMore>
         <div className="container">
-          { pageData.map(({ model, name, cargo_capacity, url }, index) => (
-                <Starships
-                  model={model}
-                  name={name}
-                  capacity={cargo_capacity}
-                  key={index}
-                  url={url}
-                />
-              ))
-           }
+          {pageData.map(
+            ({ model, name, cargo_capacity, url, starship_class }, index) => (
+              <Starships
+                model={model}
+                name={name}
+                capacity={cargo_capacity}
+                key={index}
+                url={url}
+                starshipClass={starship_class}
+              />
+            )
+          )}
         </div>
         {starshipInfo ? (
           <Paginator
