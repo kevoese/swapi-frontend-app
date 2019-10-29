@@ -1,30 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./CharacterView.scss";
 import Slide from "../../Components/Slide";
 import Characters from "../../Components/Characters";
 import logo from "../../assets/logo.png";
-import { axiosCall, charactersImg } from "../../utils";
+import { charactersImg } from "../../utils";
+import useFetchData from "../../CustomHook/useFetchData";
 
 const CharacterView = ({ match }) => {
-  const [character, setCharacter] = useState(null);
-  const [characterSlide, setCharacterSlide] = useState([{},{},{}]);
-
-  useEffect(() => {
-    let isMounted = true;
-    (async () => {
-      const content = await axiosCall({
-        url: `https://swapi.co/api/people/${match.params.id}/`
-      });
-      isMounted && setCharacter(content);
-
-      const characters = await axiosCall({
-        url: "https://swapi.co/api/people/?format=json"
-      });
-      isMounted && setCharacterSlide(characters.results.slice(0, 9));
-    })();
-    return () => (isMounted = false);
-  }, [match.params.id]);
+  const character = useFetchData(`https://swapi.co/api/people/${match.params.id}/`) ;
+  const formatDataList = (content) =>  content.results.slice(0, 9);
+  const characterSlide = useFetchData("https://swapi.co/api/people/?format=json", formatDataList);
 
   return (
     <div className="character-view">

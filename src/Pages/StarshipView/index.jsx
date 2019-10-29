@@ -1,29 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./StarshipView.scss";
 import Slide from "../../Components/Slide";
 import Starships from "../../Components/Starship";
 import logo from "../../assets/logo.png";
-import { axiosCall, getImg } from "../../utils";
+import { getImg } from "../../utils";
+import useFetchData from "../../CustomHook/useFetchData";
 
 const StarshipView = ({ match }) => {
-  const [starship, setStarship] = useState(null);
-  const [starshipSlide, setStarshipSlide] = useState([{},{},{},{},{},{}]);
+  const starship = useFetchData(`https://swapi.co/api/starships/${match.params.id}/`) ;
+  const formatDataList = (content) =>  content.results.slice(0, 9);
+  const starshipSlide = useFetchData("https://swapi.co/api/starships/?format=json", formatDataList);
 
-  useEffect(() => {
-    let isMounted = true;
-    (async () => {
-      const content = await axiosCall({
-        url: `https://swapi.co/api/starships/${match.params.id}/`
-      });
-      isMounted && setStarship(content);
-      const starships = await axiosCall({
-        url: "https://swapi.co/api/starships/?format=json"
-      });
-      isMounted && setStarshipSlide(starships.results.slice(0, 9));
-    })();
-    return () => isMounted = false;
-  }, [match.params.id]);
 
   return (
     <div className="starship-view">

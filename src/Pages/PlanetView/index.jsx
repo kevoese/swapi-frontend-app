@@ -1,29 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./PlanetView.scss";
 import Slide from "../../Components/Slide";
 import Planet from "../../Components/Planet";
 import logo from "../../assets/logo.png";
-import { axiosCall, getPlanetImg } from "../../utils";
+import { getPlanetImg } from "../../utils";
+import useFetchData from "../../CustomHook/useFetchData";
 
 const PlanetView = ({ match }) => {
-  const [planet, setPlanet] = useState(null);
-  const [planetSlide, setPlanetSlide] = useState([{},{},{},{},{},{}]);
-
-  useEffect(() => {
-    let isMounted = true;
-    (async () => {
-      const content = await axiosCall({
-        url: `https://swapi.co/api/planets/${match.params.id}/`
-      });
-      isMounted && setPlanet(content);
-      const planets = await axiosCall({
-        url: "https://swapi.co/api/planets/?format=json"
-      });
-      isMounted && setPlanetSlide(planets.results.slice(0, 9));
-    })();
-    return () => (isMounted = false);
-  }, [match.params.id]);
+  
+  const planet = useFetchData(`https://swapi.co/api/planets/${match.params.id}/`) ;
+  const formatDataList = (content) =>  content.results.slice(0, 9);
+  const planetSlide = useFetchData("https://swapi.co/api/planets/?format=json", formatDataList);
 
   return (
     <div className="planet-view">

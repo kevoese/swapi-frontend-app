@@ -5,14 +5,24 @@ import Starships from '../../Components/Starship';
 import Characters from '../../Components/Characters';
 import Slide from '../../Components/Slide';
 import Planet from '../../Components/Planet';
-import { axiosCall } from '../../utils';
+import useFetchData from '../../CustomHook/useFetchData';
 
 const Home = () => {
-  const [starshipsData, setStarships] = useState([{}, {}, {}]);
-  const [charactersData, setCharacters] = useState([{}, {}]);
-  const [planetsData, setPlanets] = useState([{}, {}, {}]);
+  const formatStarships = (content) =>  content.results.slice(0, 6);
+  const formatCharacters = (content) =>  content.results.slice(0, 4);
+  const formatPlanets = (content) =>  content.results.slice(0, 9);
+
   const [search, setSearch] = useState(null);
   const [loading, setLoading] = useState(false);
+  const starshipsData = useFetchData(`https://swapi.co/api/starships/?format=json${
+    search ? `&search=${search}` : ''
+  }`, formatStarships);
+  const planetsData = useFetchData(`https://swapi.co/api/planets/?format=json${
+    search ? `&search=${search}` : ''
+  }`, formatPlanets);
+  const charactersData = useFetchData(`https://swapi.co/api/people/?format=json${
+    search ? `&search=${search}` : ''
+  }`, formatCharacters);
 
   const handleChange = e => {
     const str = e.target.value.trim();
@@ -24,24 +34,24 @@ const Home = () => {
     let isMounted = true;
     (async () => {
       isMounted && search ? setLoading(true) : setLoading(false);
-      const starships = await axiosCall({
-        url: `https://swapi.co/api/starships/?format=json${
-          search ? `&search=${search}` : ''
-        }`,
-      });
-      isMounted && setStarships(starships.results.slice(0, 6));
-      const characters = await axiosCall({
-        url: `https://swapi.co/api/people/?format=json${
-          search ? `&search=${search}` : ''
-        }`,
-      });
-      isMounted && setCharacters(characters.results.slice(0, 4));
-      const planets = await axiosCall({
-        url: `https://swapi.co/api/planets/?format=json${
-          search ? `&search=${search}` : ''
-        }`,
-      });
-      isMounted && setPlanets(planets.results.slice(0, 9));
+      // const starships = await axiosCall({
+      //   url: `https://swapi.co/api/starships/?format=json${
+      //     search ? `&search=${search}` : ''
+      //   }`,
+      // });
+      // isMounted && setStarships(starships.results.slice(0, 6));
+      // const characters = await axiosCall({
+      //   url: `https://swapi.co/api/people/?format=json${
+      //     search ? `&search=${search}` : ''
+      //   }`,
+      // });
+      // isMounted && setCharacters(characters.results.slice(0, 4));
+      // const planets = await axiosCall({
+      //   url: `https://swapi.co/api/planets/?format=json${
+      //     search ? `&search=${search}` : ''
+      //   }`,
+      // });
+      // isMounted && setPlanets(planets.results.slice(0, 9));
       isMounted && search && setLoading(false);
     })();
     return () => (isMounted = false);
