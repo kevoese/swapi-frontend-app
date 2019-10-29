@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Search from "../../Components/Search";
-import Popular from "../../Components/Popular";
-import Starships from "../../Components/Starship";
-import Characters from "../../Components/Characters";
-import Slide from "../../Components/Slide";
-import Planet from "../../Components/Planet";
-import { axiosCall } from "../../utils";
+import React, { useState, useEffect } from 'react';
+import Search from '../../Components/Search';
+import Popular from '../../Components/Popular';
+import Starships from '../../Components/Starship';
+import Characters from '../../Components/Characters';
+import Slide from '../../Components/Slide';
+import Planet from '../../Components/Planet';
+import { axiosCall } from '../../utils';
 
 const Home = () => {
   const [starshipsData, setStarships] = useState([{}, {}, {}]);
@@ -16,7 +16,7 @@ const Home = () => {
 
   const handleChange = e => {
     const str = e.target.value.trim();
-    if (str !== "") setSearch(str);
+    if (str !== '') setSearch(str);
     else setSearch(null);
   };
 
@@ -26,25 +26,25 @@ const Home = () => {
       isMounted && search ? setLoading(true) : setLoading(false);
       const starships = await axiosCall({
         url: `https://swapi.co/api/starships/?format=json${
-          search ? `&search=${search}` : ""
-        }`
+          search ? `&search=${search}` : ''
+        }`,
       });
       isMounted && setStarships(starships.results.slice(0, 6));
       const characters = await axiosCall({
         url: `https://swapi.co/api/people/?format=json${
-          search ? `&search=${search}` : ""
-        }`
+          search ? `&search=${search}` : ''
+        }`,
       });
       isMounted && setCharacters(characters.results.slice(0, 4));
       const planets = await axiosCall({
         url: `https://swapi.co/api/planets/?format=json${
-          search ? `&search=${search}` : ""
-        }`
+          search ? `&search=${search}` : ''
+        }`,
       });
       isMounted && setPlanets(planets.results.slice(0, 9));
       isMounted && search && setLoading(false);
     })();
-    return () => isMounted = false;
+    return () => (isMounted = false);
   }, [search]);
 
   return (
@@ -54,7 +54,7 @@ const Home = () => {
         {starshipsData.length > 1 ? (
           <div className="container">
             {starshipsData.map(
-              ({ model, name, cargo_capacity, url, starship_class}, index) => (
+              ({ model, name, cargo_capacity, url, starship_class }, index) => (
                 <Starships
                   model={model}
                   name={name}
@@ -74,17 +74,19 @@ const Home = () => {
       <Popular search={search} name="Planets" hideViewMore>
         {planetsData.length > 1 ? (
           <Slide>
-            {planetsData.map(({ population, name, gravity, url, climate }, index) => (
-              <Planet
-                gravity={gravity}
-                name={name}
-                population={population}
-                key={index}
-                url={url}
-                climate={climate}
-                img="https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg"
-              />
-            ))}
+            {planetsData.map(
+              ({ population, name, gravity, url, climate }, index) => (
+                <Planet
+                  gravity={gravity}
+                  name={name}
+                  population={population}
+                  key={index}
+                  url={url}
+                  climate={climate}
+                  img="https://res.cloudinary.com/store-manager/image/upload/v1569418365/planet-1.jpg"
+                />
+              )
+            )}
           </Slide>
         ) : (
           <p className="not-found">Sorry!! No Planet Found.</p>
